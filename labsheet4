@@ -1,0 +1,39 @@
+-- Lab Sheet 4: SQL Operators
+USE CollegeDB;
+
+-- Arithmetic Operators
+SELECT 100 + 50 AS Addition;
+SELECT 100 - 30 AS Subtraction;
+SELECT 25 * 4 AS Multiplication;
+SELECT 100 / 5 AS Division;
+SELECT Product_Name, (Price * Quantity) AS Total_Amount FROM Product;
+
+-- Logical Operators
+SELECT * FROM Student_Details WHERE Course = 'BCA' AND Address = 'Delhi';
+SELECT * FROM Employee WHERE Department = 'IT' OR Department = 'HR';
+SELECT * FROM Student_Details WHERE NOT (Address = 'Delhi');
+
+-- Comparison Operators
+SELECT * FROM Student_Details WHERE Age = 21;
+SELECT * FROM Employee WHERE Salary > 45000;
+SELECT * FROM Employee WHERE Salary < 45000;
+SELECT * FROM Employee WHERE Salary >= 40000 AND Salary <= 50000;
+SELECT * FROM Student_Details WHERE Course != 'BCA';
+
+-- Special Operators
+SELECT * FROM Employee WHERE Salary BETWEEN 30000 AND 60000;
+SELECT * FROM Student_Details WHERE Address IN ('Delhi', 'Noida');
+SELECT * FROM Student_Details WHERE Address NOT IN ('Delhi', 'Noida');
+SELECT * FROM Student_Details WHERE Name LIKE 'A%';
+SELECT * FROM Student_Details WHERE Course IS NULL;
+SELECT * FROM Student_Details WHERE Course IS NOT NULL;
+
+-- Set Operations
+SELECT Name FROM Student_Details UNION SELECT Emp_Name FROM Employee;
+SELECT Name FROM Student_Details UNION ALL SELECT Emp_Name FROM Employee;
+
+-- Multi-operator demonstration
+SELECT * FROM Student_Details 
+WHERE (Age + 2) >= 22 
+  AND Address IN ('Delhi', 'Gurgaon') 
+  AND Name LIKE 'A%';
