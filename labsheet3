@@ -1,0 +1,37 @@
+-- Lab Sheet 3: SQL Functions
+USE CollegeDB;
+
+-- A. Number Functions
+SELECT ABS(-75.50);
+SELECT ROUND(123.4567, 2);
+SELECT CEIL(25.10), FLOOR(25.90);
+SELECT MOD(29, 5);
+SELECT Emp_Name, ROUND(Salary, 0) AS Rounded_Salary FROM Employee;
+
+-- B. Aggregate Functions
+SELECT COUNT(*) AS Total_Students FROM Student_Details;
+SELECT SUM(Salary) AS Total_Salary FROM Employee;
+SELECT AVG(Salary) AS Average_Salary FROM Employee;
+SELECT MAX(Salary) AS Highest_Salary FROM Employee;
+SELECT MIN(Salary) AS Lowest_Salary FROM Employee;
+
+-- C. Character Functions
+SELECT UPPER(Name) FROM Student_Details;
+SELECT LOWER(Name) FROM Student_Details;
+SELECT Name, LENGTH(Name) AS Name_Length FROM Student_Details;
+SELECT CONCAT('Mr/Ms. ', Name) AS Full_Name FROM Student_Details;
+SELECT SUBSTRING(Name, 1, 4) FROM Student_Details;
+
+-- D. Conversion Functions
+SELECT CAST(12345 AS CHAR);
+SELECT CAST('500' AS UNSIGNED) + 50;
+SELECT DATE_FORMAT(CURDATE(), '%d-%m-%Y');
+SELECT CAST(100.25 AS SIGNED);
+SELECT CONVERT('2026-05-15', DATE);
+
+-- E. Date Functions
+SELECT CURDATE() AS Current_Date_Only;
+SELECT YEAR(NOW()) AS Year, MONTH(NOW()) AS Month, DAY(NOW()) AS Day;
+SELECT DATEDIFF('2026-12-31', '2026-01-01') AS Days_Difference;
+SELECT DATE_ADD(CURDATE(), INTERVAL 15 DAY) AS Future_Date;
+SELECT DATE_FORMAT(NOW(), '%W, %M %e, %Y') AS Formatted_Date;
