@@ -1,0 +1,138 @@
+-- Lab Sheet 1: DDL Commands (CREATE, ALTER, DROP)
+
+-- 1. Create database
+CREATE DATABASE IF NOT EXISTS CollegeDB;
+USE CollegeDB;
+
+-- 2. Create Student table
+CREATE TABLE Student (
+    Student_ID INT,
+    Name VARCHAR(50),
+    Age INT,
+    Course VARCHAR(50),
+    City VARCHAR(50)
+);
+
+-- 3. Create Employee table
+CREATE TABLE Employee (
+    Emp_ID INT,
+    Emp_Name VARCHAR(50),
+    Department VARCHAR(50),
+    Salary DECIMAL(10, 2)
+);
+
+-- 4. Create Department table
+CREATE TABLE Department (
+    Dept_ID INT,
+    Dept_Name VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+-- 5. Create Product table
+CREATE TABLE Product (
+    Product_ID INT,
+    Product_Name VARCHAR(50),
+    Price DECIMAL(10, 2),
+    Quantity INT
+);
+
+-- 6. Create Customer table
+CREATE TABLE Customer (
+    Customer_ID INT,
+    Customer_Name VARCHAR(50),
+    Email VARCHAR(50),
+    Phone VARCHAR(15)
+);
+
+-- 7. Create Course table
+CREATE TABLE Course (
+    Course_ID INT,
+    Course_Name VARCHAR(50),
+    Duration VARCHAR(20),
+    Fees DECIMAL(10, 2)
+);
+
+-- 8. Create Faculty table
+CREATE TABLE Faculty (
+    Faculty_ID INT,
+    Faculty_Name VARCHAR(50),
+    Subject VARCHAR(50),
+    Salary DECIMAL(10, 2)
+);
+
+-- 9. Create Library table
+CREATE TABLE Library (
+    Book_ID INT,
+    Book_Name VARCHAR(50),
+    Author VARCHAR(50),
+    Price DECIMAL(10, 2)
+);
+
+-- 10. Create Department with Primary Key
+CREATE TABLE Department_PK (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50),
+    Location VARCHAR(50)
+);
+
+-- 11. Create Student with PK and NOT NULL
+CREATE TABLE Student_Constrained (
+    Student_ID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Age INT
+);
+
+-- 12. Create Employee with UNIQUE constraint on Email
+CREATE TABLE Employee_Unique (
+    Emp_ID INT PRIMARY KEY,
+    Email VARCHAR(50) UNIQUE
+);
+
+-- 13. Create Product with CHECK constraint
+CREATE TABLE Product_Check (
+    Product_ID INT PRIMARY KEY,
+    Price DECIMAL(10, 2) CHECK (Price > 0)
+);
+
+-- 14. Add Email column to Student table
+ALTER TABLE Student ADD Email VARCHAR(50);
+
+-- 15. Add Phone column to Student table
+ALTER TABLE Student ADD Phone VARCHAR(15);
+
+-- 16. Modify datatype/size of Name column
+ALTER TABLE Student MODIFY Name VARCHAR(100);
+
+-- 17. Rename Student table to Student_Details
+RENAME TABLE Student TO Student_Details;
+
+-- 18. Rename column City to Address
+ALTER TABLE Student_Details RENAME COLUMN City TO Address;
+
+-- 19. Add Salary column to Employee table
+ALTER TABLE Employee ADD Salary_New DECIMAL(10, 2);
+
+-- 20. Drop Phone column from Student_Details
+ALTER TABLE Student_Details DROP COLUMN Phone;
+
+-- 21. Drop Email column from Student_Details
+ALTER TABLE Student_Details DROP COLUMN Email;
+
+-- 22. Remove all records using TRUNCATE
+TRUNCATE TABLE Faculty;
+
+-- 23. Drop Course table
+DROP TABLE Course;
+
+-- 24. Drop Customer table
+DROP TABLE Customer;
+
+-- 25. Complete Student table demonstration
+CREATE TABLE Student_Final (
+    Student_ID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Email VARCHAR(50) UNIQUE,
+    Age INT CHECK (Age >= 18)
+);
+ALTER TABLE Student_Final ADD Address VARCHAR(100);
+DROP TABLE Student_Final;
