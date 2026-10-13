@@ -1,0 +1,78 @@
+-- Lab Sheet 5: SQL Joins
+USE CollegeDB;
+
+-- Setup reference tables for joins
+CREATE TABLE IF NOT EXISTS Dept (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50)
+);
+
+CREATE TABLE IF NOT EXISTS Emp (
+    Emp_ID INT PRIMARY KEY,
+    Emp_Name VARCHAR(50),
+    Dept_ID INT,
+    Manager_ID INT,
+    Salary DECIMAL(10, 2)
+);
+
+INSERT INTO Dept VALUES (1, 'Computer Science'), (2, 'Mechanical'), (3, 'Civil');
+INSERT INTO Emp VALUES 
+(1, 'Amit', 1, NULL, 60000),
+(2, 'Sunil', 1, 1, 40000),
+(3, 'Neha', 2, 1, 55000),
+(4, 'Pooja', NULL, 2, 35000);
+
+-- 1 & 2. INNER JOIN
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+INNER JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID;
+
+-- 6 & 7. LEFT OUTER JOIN
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+LEFT JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID;
+
+-- 8 & 9. RIGHT OUTER JOIN
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+RIGHT JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID;
+
+-- 10. Records not matched in LEFT JOIN
+SELECT Emp.Emp_Name 
+FROM Emp 
+LEFT JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID 
+WHERE Dept.Dept_ID IS NULL;
+
+-- 12. FULL OUTER JOIN (MySQL Workaround using UNION)
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+LEFT JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID
+UNION
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+RIGHT JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID;
+
+-- 13. CROSS JOIN
+SELECT Emp.Emp_Name, Dept.Dept_Name 
+FROM Emp 
+CROSS JOIN Dept;
+
+-- 15. NATURAL JOIN
+SELECT * FROM Emp NATURAL JOIN Dept;
+
+-- 17 & 18. SELF JOIN (Employee - Manager)
+SELECT E.Emp_Name AS Employee, M.Emp_Name AS Manager 
+FROM Emp E 
+LEFT JOIN Emp M ON E.Manager_ID = M.Emp_ID;
+
+-- 21. Joins with aggregation/conditions
+SELECT Emp.Emp_Name, Emp.Salary, Dept.Dept_Name 
+FROM Emp 
+JOIN Dept ON Emp.Dept_ID = Dept.Dept_ID 
+WHERE Emp.Salary > (SELECT AVG(Salary) FROM Emp);
+
+-- 23. Group By with Joins
+SELECT Dept.Dept_Name, COUNT(Emp.Emp_ID) AS Total_Employees 
+FROM Dept 
+LEFT JOIN Emp ON Dept.Dept_ID = Emp.Dept_ID 
+GROUP BY Dept.Dept_Name;
